@@ -14,9 +14,13 @@ import json
 import os
 import re
 
-CV = r'D:\NSS_Agent33\CV'
-CORP = os.path.join(CV, 'deepseek_data-2026-11-03', 'conversations.json')
-OUT = os.path.join(CV, '引用材料包')
+# 本脚本放在「引用材料包」里，上一级就是简历工作区。换机器时可用环境变量覆盖：
+#   CV_ROOT   简历工作区根目录（含 final/ 与语料导出）
+#   CV_CORPUS conversations.json 的完整路径
+HERE = os.path.dirname(os.path.abspath(__file__))
+CV = os.environ.get('CV_ROOT') or os.path.dirname(HERE)
+CORP = os.environ.get('CV_CORPUS') or os.path.join(CV, 'deepseek_data-2026-11-03', 'conversations.json')
+OUT = HERE
 FR = os.path.join(OUT, '片段')
 SRC = os.path.join(CV, 'final', '预终稿.txt')
 
